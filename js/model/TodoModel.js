@@ -8,6 +8,7 @@ TodoModel.prototype.subscribe = function (cb) {
     this.onChanges.push(cb);
 };
 TodoModel.prototype.inform = function () {
+    Utils.store(this.key, this.todos);
     this.onChanges.forEach((v) => {
         v();
     });
@@ -15,6 +16,12 @@ TodoModel.prototype.inform = function () {
 TodoModel.prototype.addTodo = function (val) {
     this.todos.push({ title: val, isFinish: false });
     Utils.store(this.key, this.todos);
+    this.inform();
+};
+TodoModel.prototype.destroy = function (todo) {
+    this.todos = this.todos.filter((candidate) =>
+            candidate !== todo
+    );
     this.inform();
 };
 export default TodoModel;

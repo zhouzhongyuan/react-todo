@@ -20,13 +20,18 @@ class TodoApp extends Component {
         const val = e.target.value;
         this.setState({ newTodo: val });
     }
+    destroy(todo) {
+        this.props.model.destroy(todo);
+    }
     render() {
         const todos = this.props.model.todos;
         const items = todos.map((v, i) =>
             <TodoItem
+                todo={v}
                 title={v.title}
                 isFinish={v.isFinish}
                 key={i}
+                onDestroy={() => { this.destroy(v); }}
             />
         );
         return (

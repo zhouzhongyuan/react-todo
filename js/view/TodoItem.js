@@ -8,7 +8,9 @@ class TodoItem extends Component {
                     defaultChecked={this.props.isFinish ? 'checked' : ''}
                 />
                 <label >{this.props.title}</label>
-                <button>Delete</button>
+                <button
+                    onClick={this.props.onDestroy}
+                >Delete</button>
             </li>
         );
     }
@@ -16,5 +18,6 @@ class TodoItem extends Component {
 TodoItem.propTypes = {
     title: React.PropTypes.string,
     isFinish: React.PropTypes.bool,
+    onDestroy: React.PropTypes.func,
 };
 export default TodoItem;
