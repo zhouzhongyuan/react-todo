@@ -23,6 +23,9 @@ class TodoApp extends Component {
     destroy(todo) {
         this.props.model.destroy(todo);
     }
+    toggle(todo) {
+        this.props.model.toggle(todo);
+    }
     render() {
         const todos = this.props.model.todos;
         const items = todos.map((v, i) =>
@@ -32,6 +35,7 @@ class TodoApp extends Component {
                 isFinish={v.isFinish}
                 key={i}
                 onDestroy={() => { this.destroy(v); }}
+                onToggle={() => { this.toggle(v); }}
             />
         );
         return (

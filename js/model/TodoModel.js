@@ -24,4 +24,12 @@ TodoModel.prototype.destroy = function (todo) {
     );
     this.inform();
 };
+TodoModel.prototype.toggle = function (todoToToggle) {
+    this.todos = this.todos.map((todo) =>
+        todo !== todoToToggle ?
+            todo :
+            Utils.extend({}, todo, {isFinish: !todo.isFinish})
+    );
+    this.inform();
+};
 export default TodoModel;
