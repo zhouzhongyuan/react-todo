@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 class TodoItem extends Component {
     render() {
-        const isFinish = this.props.isFinish;
-        console.log(isFinish);
         return (
             <li>
                 <input
