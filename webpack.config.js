@@ -1,18 +1,23 @@
+const path = require('path');
+const PATH = 'dist';
+const DEBUG = true;
 module.exports = {
-    context: __dirname,
-    entry: './a',
+    entry: './js/app.js',
     output: {
-        path: __dirname + '/dist',
+        path: path.resolve(__dirname, PATH),
         filename: 'bundle.js',
     },
+    cache: DEBUG,
+    debug: DEBUG,
+    devtool: DEBUG ? 'eval-source-map' : false,
     module: {
         loaders: [
-            {
-                test: /\.js$/,
-                loader: 'babel', // 'babel-loader' is also a legal name to reference
+            { test: /\.jsx?$/,
+                loader: 'babel',
                 query: {
-                    presets: ['es2015'],
+                    presets: ['es2015', 'react'],
                 },
+                plugins: ['transform-runtime'],
             },
         ],
     },
