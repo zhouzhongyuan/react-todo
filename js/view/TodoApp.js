@@ -6,7 +6,6 @@ class TodoApp extends Component {
         super(props);
         this.state = {
             newTodo: '',
-            toggleAll: false,
         };
     }
     onKeyDown(e) {
@@ -35,9 +34,9 @@ class TodoApp extends Component {
     clearCompleted() {
         this.props.model.clearCompleted();
     }
-    toggleAll() {
-        this.props.model.toggleAll(this.state.toggleAll);
-        this.setState({ toggleAll: !this.state.toggleAll });
+    toggleAll(e) {
+        const checked = e.target.checked;
+        this.props.model.toggleAll(checked);
     }
     render() {
         const todos = this.props.model.todos;
@@ -63,7 +62,7 @@ class TodoApp extends Component {
                 <input
                     type="checkbox"
                     onChange={(e) => this.toggleAll(e)}
-                    checked={this.state.toggleAll}
+                    checked={leftNumber === 0}
                 />
                 <input
                     type="text"

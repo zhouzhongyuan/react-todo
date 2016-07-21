@@ -44,9 +44,9 @@ TodoModel.prototype.clearCompleted = function () {
     );
     this.inform();
 };
-TodoModel.prototype.toggleAll = function (isSelectAll) {
+TodoModel.prototype.toggleAll = function (checked) {
     this.todos = this.todos.map((item) =>
-        Utils.extend({}, item, { isFinish: !isSelectAll })
+        Utils.extend({}, item, { isFinish: checked })
     );
     this.inform();
 };
