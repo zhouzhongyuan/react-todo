@@ -29,6 +29,9 @@ class TodoApp extends Component {
     titleChange(todo, newTitle) {
         this.props.model.titleChange(todo, newTitle);
     }
+    clearCompleted() {
+        this.props.model.clearCompleted();
+    }
     render() {
         const todos = this.props.model.todos;
         const items = todos.map((v, i) =>
@@ -42,6 +45,11 @@ class TodoApp extends Component {
                 onTitleChange={(newTitle) => { this.titleChange(v, newTitle); }}
             />
         );
+        const leftTodo = todos.filter((item) =>
+            item.isFinish === false
+        );
+        const leftNumber = leftTodo.length;
+        const completedNumber = todos.length - leftTodo.length;
         return (
             <div>
                 <h1>todos</h1>
@@ -53,7 +61,11 @@ class TodoApp extends Component {
                     value={this.state.newTodo || ''}
                 />
                 {items}
-                <Footer />
+                <Footer
+                    leftNumber={leftNumber}
+                    completedNumber={completedNumber}
+                    onClearCompleted={(e) => this.clearCompleted(e)}
+                />
             </div>
         );
     }

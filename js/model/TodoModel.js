@@ -38,4 +38,10 @@ TodoModel.prototype.titleChange = function (todoToChange, newTitle) {
     );
     this.inform();
 };
+TodoModel.prototype.clearCompleted = function () {
+    this.todos = this.todos.filter((item) =>
+        item.isFinish === false
+    );
+    this.inform();
+};
 export default TodoModel;
