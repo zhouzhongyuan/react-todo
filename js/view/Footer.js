@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 class Footer extends Component {
     render() {
         return (
@@ -12,22 +13,22 @@ class Footer extends Component {
                     className="filters"
                 >
                     <li>
-                        <a
-                            href="#/"
+                        <Link
+                            to="/"
                         >All
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
-                            href="#/"
+                        <Link
+                            to="/active"
                         >Active
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
-                            href="#/"
+                        <Link
+                            to="/completed"
                         >Completed
-                        </a>
+                        </Link>
                     </li>
                 </ul>
                 <button

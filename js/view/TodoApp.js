@@ -39,7 +39,21 @@ class TodoApp extends Component {
         this.props.model.toggleAll(checked);
     }
     render() {
-        const todos = this.props.model.todos;
+        let todos = this.props.model.todos;
+        const leftTodo = todos.filter((item) =>
+            item.isFinish === false
+        );
+        const leftNumber = leftTodo.length;
+        const completedNumber = todos.length - leftTodo.length;
+        switch (this.props.filter) {
+            case 'active':
+                todos = todos.filter((item) => item.isFinish === false);
+                break;
+            case 'completed':
+                todos = todos.filter((item) => item.isFinish === true);
+                break;
+            default:
+        }
         const items = todos.map((v, i) =>
             <TodoItem
                 todo={v}
@@ -51,16 +65,10 @@ class TodoApp extends Component {
                 onTitleChange={(newTitle) => { this.titleChange(v, newTitle); }}
             />
         );
-        const leftTodo = todos.filter((item) =>
-            item.isFinish === false
-        );
-        const leftNumber = leftTodo.length;
-        const completedNumber = todos.length - leftTodo.length;
         return (
             <div>
                 <header>
                     <h1>todos</h1>
-
                     <input
                         className="new-todo"
                         type="text"
@@ -96,5 +104,6 @@ class TodoApp extends Component {
 }
 TodoApp.propTypes = {
     model: React.PropTypes.object,
+    filter: React.PropTypes.string,
 };
 export default TodoApp;
