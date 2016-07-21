@@ -22,21 +22,28 @@ class TodoItem extends Component {
             <li
                 className={this.props.isFinish ? 'completed' : ''}
             >
+                <div
+                    className="view"
+                >
+                    <input
+                        className="toggle"
+                        type="checkbox"
+                        checked={this.props.isFinish ? 'checked' : ''}
+                        onChange={this.props.onToggle}
+                    />
+                    <label >{this.props.title}</label>
+                    <button
+                        className="destroy"
+                        onClick={this.props.onDestroy}
+                    ></button>
+                </div>
                 <input
-                    type="checkbox"
-                    checked={this.props.isFinish ? 'checked' : ''}
-                    onChange={this.props.onToggle}
-                />
-                <label >{this.props.title}</label>
-                <input
+                    className="edit"
                     type="text"
                     defaultValue={this.state.title}
                     onKeyDown={(e) => this.onKeyDown(e)}
                     onChange={(e) => this.handleChange(e)}
                 />
-                <button
-                    onClick={this.props.onDestroy}
-                >Delete</button>
             </li>
         );
     }

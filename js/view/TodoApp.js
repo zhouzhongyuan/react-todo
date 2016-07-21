@@ -58,20 +58,33 @@ class TodoApp extends Component {
         const completedNumber = todos.length - leftTodo.length;
         return (
             <div>
-                <h1>todos</h1>
-                <input
-                    type="checkbox"
-                    onChange={(e) => this.toggleAll(e)}
-                    checked={leftNumber === 0}
-                />
-                <input
-                    type="text"
-                    placeholder="What needs to be done?"
-                    onKeyDown={(e) => this.onKeyDown(e)}
-                    onChange={(e) => this.handleChange(e)}
-                    value={this.state.newTodo || ''}
-                />
-                {items}
+                <header>
+                    <h1>todos</h1>
+
+                    <input
+                        className="new-todo"
+                        type="text"
+                        placeholder="What needs to be done?"
+                        onKeyDown={(e) => this.onKeyDown(e)}
+                        onChange={(e) => this.handleChange(e)}
+                        value={this.state.newTodo || ''}
+                    />
+                </header>
+                <section
+                    className="main"
+                >
+                    <input
+                        className="toggle-all"
+                        type="checkbox"
+                        onChange={(e) => this.toggleAll(e)}
+                        checked={leftNumber === 0}
+                    />
+                    <ul
+                        className="todo-list"
+                    >
+                        {items}
+                    </ul>
+                </section>
                 <Footer
                     leftNumber={leftNumber}
                     completedNumber={completedNumber}
