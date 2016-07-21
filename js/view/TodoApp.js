@@ -6,6 +6,7 @@ class TodoApp extends Component {
         super(props);
         this.state = {
             newTodo: '',
+            editing: null,
         };
     }
     onKeyDown(e) {
@@ -38,6 +39,16 @@ class TodoApp extends Component {
         const checked = e.target.checked;
         this.props.model.toggleAll(checked);
     }
+    edit(todo) {
+        this.setState({ editing: todo.id });
+    }
+    save(todoToSave, text) {
+        this.props.model.save(todoToSave, text);
+        this.setState({ editing: null });
+    }
+    cancel() {
+        this.setState({ editing: null });
+    }
     render() {
         let todos = this.props.model.todos;
         const leftTodo = todos.filter((item) =>
@@ -63,6 +74,10 @@ class TodoApp extends Component {
                 onDestroy={() => { this.destroy(v); }}
                 onToggle={() => { this.toggle(v); }}
                 onTitleChange={(newTitle) => { this.titleChange(v, newTitle); }}
+                onEdit={() => this.edit(v)}
+                editing={this.state.editing === v.id}
+                onSave={() => this.save(v)}
+                onCancel={() => this.cancel()}
             />
         );
         return (

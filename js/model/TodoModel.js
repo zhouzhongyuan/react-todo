@@ -14,7 +14,11 @@ TodoModel.prototype.inform = function () {
     });
 };
 TodoModel.prototype.addTodo = function (val) {
-    this.todos.push({ title: val, isFinish: false });
+    this.todos.push({
+        id: Utils.uuid(),
+        title: val,
+        isFinish: false,
+    });
     Utils.store(this.key, this.todos);
     this.inform();
 };

@@ -8,6 +8,7 @@ class TodoItem extends Component {
         if (e.which !== 13) {
             return;
         }
+        this.props.onCancel(event);
         const val = this.state.title.trim();
         if (val) {
             this.props.onTitleChange(val);
@@ -17,10 +18,15 @@ class TodoItem extends Component {
         const val = e.target.value;
         this.setState({ title: val });
     }
+    handleEdit() {
+        this.props.onEdit();
+    }
     render() {
+        const clsName1 = this.props.isFinish ? 'completed' : '';
+        const clsName2 = this.props.editing ? 'editing' : '';
         return (
             <li
-                className={this.props.isFinish ? 'completed' : ''}
+                className={`${clsName1} ${clsName2}`}
             >
                 <div
                     className="view"
@@ -31,7 +37,9 @@ class TodoItem extends Component {
                         checked={this.props.isFinish ? 'checked' : ''}
                         onChange={this.props.onToggle}
                     />
-                    <label >{this.props.title}</label>
+                    <label
+                        onDoubleClick={() => this.handleEdit()}
+                    >{this.props.title}</label>
                     <button
                         className="destroy"
                         onClick={this.props.onDestroy}
@@ -54,5 +62,8 @@ TodoItem.propTypes = {
     onDestroy: React.PropTypes.func,
     onToggle: React.PropTypes.func,
     onTitleChange: React.PropTypes.func,
+    editing: React.PropTypes.bool,
+    onEdit: React.PropTypes.func,
+    onCancel: React.PropTypes.func,
 };
 export default TodoItem;
