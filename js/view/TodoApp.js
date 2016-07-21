@@ -31,6 +31,7 @@ class TodoApp extends Component {
     }
     titleChange(todo, newTitle) {
         this.props.model.titleChange(todo, newTitle);
+        this.setState({ editing: null });
     }
     clearCompleted() {
         this.props.model.clearCompleted();

@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 class TodoItem extends Component {
     constructor(props) {
         super(props);
         this.state = { title: this.props.title };
+    }
+    componentDidUpdate(prevProps) {
+        if (!prevProps.editing && this.props.editing) {
+            const node = ReactDOM.findDOMNode(this.refs.editField);
+            node.focus();
+            node.setSelectionRange(node.value.length, node.value.length);
+        }
     }
     onKeyDown(e) {
         if (e.which !== 13) {
@@ -20,6 +28,14 @@ class TodoItem extends Component {
     }
     handleEdit() {
         this.props.onEdit();
+    }
+    handleSubmit() {
+        const val = this.state.title.trim();
+        if (val) {
+            this.props.onTitleChange(val);
+        } else {
+            this.props.onDestroy();
+        }
     }
     render() {
         const clsName1 = this.props.isFinish ? 'completed' : '';
@@ -46,11 +62,13 @@ class TodoItem extends Component {
                     ></button>
                 </div>
                 <input
+                    ref="editField"
                     className="edit"
                     type="text"
                     defaultValue={this.state.title}
                     onKeyDown={(e) => this.onKeyDown(e)}
                     onChange={(e) => this.handleChange(e)}
+                    onBlur={() => this.handleSubmit()}
                 />
             </li>
         );
