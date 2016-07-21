@@ -10,13 +10,17 @@ const active = () =>
     <TodoApp model={model} filter="active" />;
 const completed = () =>
     <TodoApp model={model} filter="completed" />;
+const routes = (
+    <div>
+        <Route path="/" component={app} />
+        <Route path="/active" component={active} />
+        <Route path="completed" component={completed} />
+    </div>
+);
 function render() {
     ReactDOM.render(
-        <Router history={hashHistory}>
-            <Route path="/" component={app} />
-            <Route path="active" component={active} />
-            <Route path="completed" component={completed} />
-        </Router>, document.getElementsByClassName('todoapp')[0]);
+        <Router history={hashHistory}>{routes}</Router>,
+        document.getElementsByClassName('todoapp')[0]);
 }
 render();
 model.subscribe(render);
