@@ -24,7 +24,7 @@ class TodoItem extends Component {
             >
                 <input
                     type="checkbox"
-                    defaultChecked={this.props.isFinish ? 'checked' : ''}
+                    checked={this.props.isFinish ? 'checked' : ''}
                     onChange={this.props.onToggle}
                 />
                 <label >{this.props.title}</label>

@@ -4,7 +4,10 @@ import TodoItem from './TodoItem';
 class TodoApp extends Component {
     constructor(props) {
         super(props);
-        this.state = { newTodo: '' };
+        this.state = {
+            newTodo: '',
+            toggleAll: false,
+        };
     }
     onKeyDown(e) {
         if (e.which !== 13) {
@@ -32,6 +35,10 @@ class TodoApp extends Component {
     clearCompleted() {
         this.props.model.clearCompleted();
     }
+    toggleAll() {
+        this.props.model.toggleAll(this.state.toggleAll);
+        this.setState({ toggleAll: !this.state.toggleAll });
+    }
     render() {
         const todos = this.props.model.todos;
         const items = todos.map((v, i) =>
@@ -53,6 +60,11 @@ class TodoApp extends Component {
         return (
             <div>
                 <h1>todos</h1>
+                <input
+                    type="checkbox"
+                    onChange={(e) => this.toggleAll(e)}
+                    checked={this.state.toggleAll}
+                />
                 <input
                     type="text"
                     placeholder="What needs to be done?"
