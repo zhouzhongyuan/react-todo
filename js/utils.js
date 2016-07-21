@@ -7,15 +7,15 @@ utils.store = function (namespace, data) {
     return (store && JSON.parse(store)) || [];
 };
 utils.extend = function () {
-    var newObj = {};
-    for (var i = 0; i < arguments.length; i++) {
-        var obj = arguments[i];
-        for (var key in obj) {
+    const newObj = {};
+    for (let i = 0; i < arguments.length; i++) {
+        const obj = arguments[i];
+        for (const key in obj) {
             if (obj.hasOwnProperty(key)) {
                 newObj[key] = obj[key];
             }
         }
     }
     return newObj;
-}
+};
 export default utils;

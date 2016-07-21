@@ -26,6 +26,9 @@ class TodoApp extends Component {
     toggle(todo) {
         this.props.model.toggle(todo);
     }
+    titleChange(todo, newTitle) {
+        this.props.model.titleChange(todo, newTitle);
+    }
     render() {
         const todos = this.props.model.todos;
         const items = todos.map((v, i) =>
@@ -36,6 +39,7 @@ class TodoApp extends Component {
                 key={i}
                 onDestroy={() => { this.destroy(v); }}
                 onToggle={() => { this.toggle(v); }}
+                onTitleChange={(newTitle) => { this.titleChange(v, newTitle); }}
             />
         );
         return (

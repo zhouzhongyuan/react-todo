@@ -28,7 +28,13 @@ TodoModel.prototype.toggle = function (todoToToggle) {
     this.todos = this.todos.map((todo) =>
         todo !== todoToToggle ?
             todo :
-            Utils.extend({}, todo, {isFinish: !todo.isFinish})
+            Utils.extend({}, todo, { isFinish: !todo.isFinish })
+    );
+    this.inform();
+};
+TodoModel.prototype.titleChange = function (todoToChange, newTitle) {
+    this.todos = this.todos.map((todo) =>
+        todo !== todoToChange ? todo : Utils.extend({}, todo, { title: newTitle })
     );
     this.inform();
 };
